@@ -1,0 +1,38 @@
+[gd_scene load_steps=2 format=3 uid="uid://gx1hsdoudys"]
+
+[ext_resource type="Script" path="res://Scripts/debug_gui.gd" id="1_s83w3"]
+
+[node name="DebugGui" type="CanvasLayer"]
+script = ExtResource("1_s83w3")
+
+[node name="Panel" type="Panel" parent="."]
+offset_right = 639.0
+offset_bottom = 96.0
+
+[node name="Velocity" type="Label" parent="Panel"]
+layout_mode = 0
+offset_right = 637.0
+offset_bottom = 23.0
+text = "Velocity:"
+
+[node name="FPS" type="Label" parent="Panel"]
+layout_mode = 0
+offset_top = 21.0
+offset_right = 630.0
+offset_bottom = 44.0
+text = "FPS:"
+
+[node name="mainMod" type="Label" parent="Panel"]
+layout_mode = 0
+offset_top = 45.0
+offset_right = 637.0
+offset_bottom = 68.0
+text = "MainMod:"
+
+[node name="transMod" type="Label" parent="Panel"]
+layout_mode = 0
+offset_left = -1.0
+offset_top = 72.0
+offset_right = 636.0
+offset_bottom = 95.0
+text = "TransMod:"

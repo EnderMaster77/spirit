@@ -1,0 +1,25 @@
+[gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://baebtnecncwi2"]
+
+[ext_resource type="Shader" path="res://Shaders/lightning.tres.gdshader" id="1_apiwn"]
+
+[sub_resource type="Gradient" id="Gradient_rwe5i"]
+offsets = PackedFloat32Array(0, 0.119718, 0.45082, 0.514085, 0.983607, 0.991803, 1)
+colors = PackedColorArray(0, 0, 0, 1, 0.721569, 0, 0, 1, 1, 1, 0, 1, 0.995122, 0.994572, 0.101224, 0.898776, 0.95892, 0.954291, 0.852459, 0.147541, 0.451256, 0.449078, 0.401157, 0.598843, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1nxmo"]
+gradient = SubResource("Gradient_rwe5i")
+fill_from = Vector2(0.290323, 0)
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_f2a1g"]
+seamless = true
+seamless_blend_skirt = 1.0
+
+[resource]
+shader = ExtResource("1_apiwn")
+shader_parameter/progress = -1.0
+shader_parameter/timed = true
+shader_parameter/speed = 1.0
+shader_parameter/angle = 0.0
+shader_parameter/grow_factor = 1.0
+shader_parameter/noise = SubResource("NoiseTexture2D_f2a1g")
+shader_parameter/colorCurve = SubResource("GradientTexture2D_1nxmo")

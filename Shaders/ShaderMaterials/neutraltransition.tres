@@ -1,0 +1,31 @@
+[gd_resource type="ShaderMaterial" load_steps=6 format=3 uid="uid://bewkrxpl1lgge"]
+
+[ext_resource type="Shader" path="res://Shaders/neutral.gdshader" id="1_rbutc"]
+
+[sub_resource type="Gradient" id="Gradient_rwe5i"]
+offsets = PackedFloat32Array(0.0422535, 0.43662, 0.983607, 0.991803, 1)
+colors = PackedColorArray(0, 0, 1, 1, 0.533333, 0.756863, 1, 1, 0.95892, 0.954291, 0.852459, 0.147541, 0.451256, 0.449078, 0.401157, 0.598843, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_1nxmo"]
+gradient = SubResource("Gradient_rwe5i")
+fill_from = Vector2(0.290323, 0)
+
+[sub_resource type="Gradient" id="Gradient_sdqwt"]
+offsets = PackedFloat32Array(0.471831, 1)
+colors = PackedColorArray(1, 1, 1, 0, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_6ejkl"]
+gradient = SubResource("Gradient_sdqwt")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.218447, 0.26699)
+
+[resource]
+shader = ExtResource("1_rbutc")
+shader_parameter/progress = -1.0
+shader_parameter/timed = false
+shader_parameter/speed = 3.0
+shader_parameter/angle = 0.0
+shader_parameter/grow_factor = 0.0
+shader_parameter/gradient = SubResource("GradientTexture2D_6ejkl")
+shader_parameter/colorCurve = SubResource("GradientTexture2D_1nxmo")

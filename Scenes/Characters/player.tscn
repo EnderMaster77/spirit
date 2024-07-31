@@ -1,0 +1,113 @@
+[gd_scene load_steps=13 format=3 uid="uid://c7xm82uma1fy7"]
+
+[ext_resource type="Script" path="res://Scripts/player.gd" id="1_1q7we"]
+[ext_resource type="Texture2D" uid="uid://cjht8i8qljuta" path="res://icon.svg" id="1_2slvi"]
+[ext_resource type="Script" path="res://Scripts/EffectController.gd" id="3_mo646"]
+[ext_resource type="Shader" path="res://Shaders/blur.gdshader" id="3_n5rs3"]
+[ext_resource type="Script" path="res://Scripts/element_switch_gui.gd" id="5_qyee1"]
+[ext_resource type="Script" path="res://Scripts/switch_gui_element.gd" id="6_5gsln"]
+[ext_resource type="PackedScene" uid="uid://gx1hsdoudys" path="res://Scenes/GUIs/debug_gui.tscn" id="6_ofnd2"]
+[ext_resource type="Script" path="res://Scripts/sprite_manager.gd" id="8_mccy3"]
+[ext_resource type="Material" uid="uid://baebtnecncwi2" path="res://Shaders/ShaderMaterials/lightningtransition.tres" id="9_x5skr"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kgxqf"]
+size = Vector2(128, 128)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xp3ao"]
+shader = ExtResource("3_n5rs3")
+shader_parameter/strength = 0.0
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_bfckg"]
+size = Vector2(1920, 1080)
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+script = ExtResource("1_1q7we")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_kgxqf")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(0.75, 0.75)
+
+[node name="FXman" type="CanvasLayer" parent="."]
+process_mode = 3
+script = ExtResource("3_mo646")
+
+[node name="blur" type="Sprite2D" parent="FXman"]
+process_mode = 3
+visible = false
+material = SubResource("ShaderMaterial_xp3ao")
+position = Vector2(960, 540)
+texture = SubResource("PlaceholderTexture2D_bfckg")
+
+[node name="ElementSwitchGui" type="Node2D" parent="."]
+process_mode = 2
+script = ExtResource("5_qyee1")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="ElementSwitchGui"]
+process_mode = 3
+layer = 2
+
+[node name="neutral" type="Sprite2D" parent="ElementSwitchGui/CanvasLayer"]
+process_mode = 3
+position = Vector2(960, 540)
+texture = ExtResource("1_2slvi")
+script = ExtResource("6_5gsln")
+
+[node name="fire" type="Sprite2D" parent="ElementSwitchGui/CanvasLayer"]
+process_mode = 3
+modulate = Color(1, 0, 0, 1)
+position = Vector2(690, 540)
+texture = ExtResource("1_2slvi")
+script = ExtResource("6_5gsln")
+element_to_switch_to = 2
+
+[node name="water" type="Sprite2D" parent="ElementSwitchGui/CanvasLayer"]
+process_mode = 3
+modulate = Color(0, 0, 1, 1)
+position = Vector2(1230, 540)
+texture = ExtResource("1_2slvi")
+script = ExtResource("6_5gsln")
+element_to_switch_to = 1
+
+[node name="lightning" type="Sprite2D" parent="ElementSwitchGui/CanvasLayer"]
+modulate = Color(1, 1, 0, 1)
+position = Vector2(960, 270)
+texture = ExtResource("1_2slvi")
+script = ExtResource("6_5gsln")
+element_to_switch_to = 4
+
+[node name="earth" type="Sprite2D" parent="ElementSwitchGui/CanvasLayer"]
+process_mode = 3
+modulate = Color(0, 1, 0, 1)
+position = Vector2(960, 810)
+texture = ExtResource("1_2slvi")
+script = ExtResource("6_5gsln")
+element_to_switch_to = 3
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 255
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_kgxqf")
+
+[node name="DebugGui" parent="." instance=ExtResource("6_ofnd2")]
+
+[node name="SpriteManager" type="Node2D" parent="."]
+script = ExtResource("8_mccy3")
+
+[node name="Transition_To" type="Sprite2D" parent="SpriteManager"]
+texture = ExtResource("1_2slvi")
+
+[node name="Main" type="Sprite2D" parent="SpriteManager"]
+modulate = Color(0, 0, 1, 1)
+material = ExtResource("9_x5skr")
+texture = ExtResource("1_2slvi")
+
+[connection signal="switch_to_element" from="." to="." method="_on_switch_to_element"]
+[connection signal="switch_to_state" from="." to="." method="_on_switch_to_state"]
+[connection signal="switch_to_element" from="ElementSwitchGui" to="." method="_on_switch_to_element"]
+[connection signal="switch_to_element" from="ElementSwitchGui" to="SpriteManager" method="_on_switch_to_element"]
+[connection signal="area_entered" from="Area2D" to="." method="_on_hitbox_collision"]
+[connection signal="body_entered" from="Area2D" to="." method="_on_hitbox_collision"]
