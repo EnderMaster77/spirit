@@ -29,7 +29,7 @@ func neutral_transition(delta: float):
 	if main.material.get_shader_parameter("progress") >= 3.97:
 		make_main()
 		transitioning = false
-	
+
 func water_transition(delta: float):
 	print("w")
 	make_main()
@@ -104,7 +104,7 @@ func _on_switch_to_element(state: int) -> void:
 			transitioning = true
 			trans.show()
 			trans.modulate = Color(0,1,0,1)
-			
+
 		4:
 			if element == "lightning":
 				return

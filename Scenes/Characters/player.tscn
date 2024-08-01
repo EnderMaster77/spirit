@@ -105,8 +105,6 @@ modulate = Color(0, 0, 1, 1)
 material = ExtResource("9_x5skr")
 texture = ExtResource("1_2slvi")
 
-[connection signal="switch_to_element" from="." to="." method="_on_switch_to_element"]
-[connection signal="switch_to_state" from="." to="." method="_on_switch_to_state"]
 [connection signal="switch_to_element" from="ElementSwitchGui" to="." method="_on_switch_to_element"]
 [connection signal="switch_to_element" from="ElementSwitchGui" to="SpriteManager" method="_on_switch_to_element"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_hitbox_collision"]

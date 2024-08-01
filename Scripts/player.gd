@@ -29,7 +29,7 @@ func _physics_process(delta: float) -> void:
 	var direction := Input.get_axis("left","right")
 	# Calls the current element's Movement function automatically.
 	call(element+"_movement",direction,delta)
-	
+
 	move_and_slide()
 
 func _input(event: InputEvent) -> void:
@@ -37,9 +37,9 @@ func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("switchElement"):
 		$ElementSwitchGui.process_mode = Node.PROCESS_MODE_ALWAYS
 		$ElementSwitchGui.enable()
-		
+
 		#get_tree().paused = true
-	
+
 
 func neutral_movement(direction:float, delta:float) -> void:
 	# Y axis Control
@@ -47,7 +47,7 @@ func neutral_movement(direction:float, delta:float) -> void:
 		velocity += get_gravity() * delta
 	elif Input.is_action_just_pressed("jump"):
 		velocity.y = JUMP_VELOCITY
-	
+
 	# X axis Control
 	# Decel
 	if direction == 0:
@@ -63,8 +63,8 @@ func water_movement(direction:float, delta:float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	elif Input.is_action_just_pressed("jump"):
-		velocity.y = JUMP_VELOCITY
-	
+		velocity.sd = JUMP_VELOCITY
+
 	# X axis Control
 	# Decel
 	if direction == 0:
@@ -81,7 +81,7 @@ func fire_movement(direction:float, delta:float) -> void:
 		velocity += get_gravity() * delta
 	elif Input.is_action_just_pressed("jump"):
 		velocity.y = JUMP_VELOCITY
-	
+
 	# X axis Control
 	# Decel
 	if direction == 0:
@@ -98,7 +98,7 @@ func earth_movement(direction:float, delta:float) -> void:
 		velocity += get_gravity() * delta
 	elif Input.is_action_just_pressed("jump"):
 		velocity.y = JUMP_VELOCITY
-	
+	test123
 	# X axis Control
 	# Decel
 	if direction == 0:
@@ -115,7 +115,7 @@ func lightning_movement(direction:float, delta:float) -> void:
 		velocity += get_gravity() * delta
 	elif Input.is_action_just_pressed("jump"):
 		velocity.y = JUMP_VELOCITY
-	
+
 	# X axis Control
 	# Decel
 	if direction == 0:
