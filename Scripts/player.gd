@@ -8,8 +8,8 @@ var friction: float
 
 @onready var Fxman: FXmanager = $FXman
 
-signal switch_to_element
-signal switch_to_state
+#signal switch_to_element
+#signal switch_to_state
 
 var element: String
 var current_state: String
@@ -63,7 +63,7 @@ func water_movement(direction:float, delta:float) -> void:
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	elif Input.is_action_just_pressed("jump"):
-		velocity.sd = JUMP_VELOCITY
+		velocity.x = JUMP_VELOCITY
 
 	# X axis Control
 	# Decel
@@ -98,7 +98,6 @@ func earth_movement(direction:float, delta:float) -> void:
 		velocity += get_gravity() * delta
 	elif Input.is_action_just_pressed("jump"):
 		velocity.y = JUMP_VELOCITY
-	test123
 	# X axis Control
 	# Decel
 	if direction == 0:
