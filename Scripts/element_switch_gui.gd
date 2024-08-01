@@ -4,6 +4,7 @@ extends Node2D
 var alpha_to: float = 0
 var enabled: bool = false
 var modA: float = 0
+var cooled_down: bool = true
 signal switch_to_element
 
 
@@ -21,7 +22,9 @@ func _ready() -> void:
 	alpha_to = -1
 
 
-func enable():
+func enable() -> void:
+	if cooled_down == false:
+		return
 	FXman.blur()
 	modA = 0
 	alpha_to = 1
@@ -30,7 +33,11 @@ func enable():
 	show()
 
 
+
+
 func disable():
+	$"../Timer".start()
+	cooled_down = false
 	FXman.unblur()
 	alpha_to = -1
 
@@ -64,3 +71,8 @@ func get_closest_to_mouse(nodes: Array):  # Nodes is array with node2Ds.
 			least_distance = distance
 			closest_node = node
 	return closest_node
+
+
+func _on_timer_timeout() -> void:
+	print("Hello World!")
+	cooled_down = true

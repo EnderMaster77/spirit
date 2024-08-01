@@ -30,7 +30,8 @@ void fragment() {
 	}
 	if (burn_progress > 0.0){
 		vec2 uv = (UV - vec2(0.5,0.5)) / burn_progress + vec2(0.5,0.5);
-		COLOR.a = texture(gradient,uv).a;
+		if (COLOR.a != 0.0){
+			COLOR.a = texture(gradient,uv).a;}
 	}
 
 	//float gradient = texture(noise,UV);

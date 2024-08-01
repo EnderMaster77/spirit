@@ -12,8 +12,8 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	$Panel/Velocity.text = "Velocity: " + str($"..".velocity)
 	$Panel/FPS.text = "FPS: " + str(Engine.get_frames_per_second())
-	$Panel/mainMod.text = "Main Mod: " + str($"../SpriteManager/Main".get_modulate())
-	$Panel/transMod.text = "Trans Mod: " + str($"../SpriteManager/Transition_To".get_modulate())
+	#$Panel/mainMod.text = "Main Mod: " + str($"../SpriteManager/Main".get_modulate())
+	#$Panel/transMod.text = "Trans Mod: " + str($"../SpriteManager/Transition_To".get_modulate())
 
 
 func _input(event: InputEvent) -> void:

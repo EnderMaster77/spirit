@@ -22,7 +22,7 @@ fill_to = Vector2(0.218447, 0.26699)
 
 [resource]
 shader = ExtResource("1_rbutc")
-shader_parameter/progress = -1.0
+shader_parameter/progress = 0.0
 shader_parameter/timed = false
 shader_parameter/speed = 3.0
 shader_parameter/angle = 0.0

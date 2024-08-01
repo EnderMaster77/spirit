@@ -8,7 +8,7 @@
 [ext_resource type="Script" path="res://Scripts/switch_gui_element.gd" id="6_5gsln"]
 [ext_resource type="PackedScene" uid="uid://gx1hsdoudys" path="res://Scenes/GUIs/debug_gui.tscn" id="6_ofnd2"]
 [ext_resource type="Script" path="res://Scripts/sprite_manager.gd" id="8_mccy3"]
-[ext_resource type="Material" uid="uid://baebtnecncwi2" path="res://Shaders/ShaderMaterials/lightningtransition.tres" id="9_x5skr"]
+[ext_resource type="Material" uid="uid://bewkrxpl1lgge" path="res://Shaders/ShaderMaterials/neutraltransition.tres" id="9_7318l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kgxqf"]
 size = Vector2(128, 128)
@@ -35,10 +35,13 @@ script = ExtResource("3_mo646")
 
 [node name="blur" type="Sprite2D" parent="FXman"]
 process_mode = 3
-visible = false
 material = SubResource("ShaderMaterial_xp3ao")
 position = Vector2(960, 540)
 texture = SubResource("PlaceholderTexture2D_bfckg")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.01
+one_shot = true
 
 [node name="ElementSwitchGui" type="Node2D" parent="."]
 process_mode = 2
@@ -60,7 +63,7 @@ modulate = Color(1, 0, 0, 1)
 position = Vector2(690, 540)
 texture = ExtResource("1_2slvi")
 script = ExtResource("6_5gsln")
-element_to_switch_to = 2
+element_to_switch_to = "fire"
 
 [node name="water" type="Sprite2D" parent="ElementSwitchGui/CanvasLayer"]
 process_mode = 3
@@ -68,14 +71,14 @@ modulate = Color(0, 0, 1, 1)
 position = Vector2(1230, 540)
 texture = ExtResource("1_2slvi")
 script = ExtResource("6_5gsln")
-element_to_switch_to = 1
+element_to_switch_to = "water"
 
 [node name="lightning" type="Sprite2D" parent="ElementSwitchGui/CanvasLayer"]
 modulate = Color(1, 1, 0, 1)
 position = Vector2(960, 270)
 texture = ExtResource("1_2slvi")
 script = ExtResource("6_5gsln")
-element_to_switch_to = 4
+element_to_switch_to = "lightning"
 
 [node name="earth" type="Sprite2D" parent="ElementSwitchGui/CanvasLayer"]
 process_mode = 3
@@ -83,7 +86,7 @@ modulate = Color(0, 1, 0, 1)
 position = Vector2(960, 810)
 texture = ExtResource("1_2slvi")
 script = ExtResource("6_5gsln")
-element_to_switch_to = 3
+element_to_switch_to = "earth"
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 0
@@ -97,14 +100,12 @@ shape = SubResource("RectangleShape2D_kgxqf")
 [node name="SpriteManager" type="Node2D" parent="."]
 script = ExtResource("8_mccy3")
 
-[node name="Transition_To" type="Sprite2D" parent="SpriteManager"]
-texture = ExtResource("1_2slvi")
-
 [node name="Main" type="Sprite2D" parent="SpriteManager"]
-modulate = Color(0, 0, 1, 1)
-material = ExtResource("9_x5skr")
+z_index = 1
+material = ExtResource("9_7318l")
 texture = ExtResource("1_2slvi")
 
+[connection signal="timeout" from="Timer" to="ElementSwitchGui" method="_on_timer_timeout"]
 [connection signal="switch_to_element" from="ElementSwitchGui" to="." method="_on_switch_to_element"]
 [connection signal="switch_to_element" from="ElementSwitchGui" to="SpriteManager" method="_on_switch_to_element"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_hitbox_collision"]

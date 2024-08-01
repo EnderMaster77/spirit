@@ -17,20 +17,22 @@ var current_state: String
 @onready var cam = $Camera2D
 
 
-
 func _ready() -> void:
 	friction = DEFAULT_FRICTION
 	element = "neutral"
 
+
 func _process(delta: float) -> void:
 	mod_camera(delta)
 
+
 func _physics_process(delta: float) -> void:
-	var direction := Input.get_axis("left","right")
+	var direction := Input.get_axis("left", "right")
 	# Calls the current element's Movement function automatically.
-	call(element+"_movement",direction,delta)
+	call(element + "_movement", direction, delta)
 
 	move_and_slide()
+
 
 func _input(event: InputEvent) -> void:
 	# For things that don't need to be ran every frame or are tied to phyisics.
@@ -41,24 +43,24 @@ func _input(event: InputEvent) -> void:
 		#get_tree().paused = true
 
 
-func neutral_movement(direction:float, delta:float) -> void:
+func neutral_movement(direction: float, delta: float) -> void:
 	# Y axis Control
 	if not is_on_floor():
 		velocity += get_gravity() * delta
 	elif Input.is_action_just_pressed("jump"):
 		velocity.y = JUMP_VELOCITY
-
 	# X axis Control
 	# Decel
 	if direction == 0:
-		velocity.x = move_toward(velocity.x,0,friction * delta)
+		velocity.x = move_toward(velocity.x, 0, friction * delta)
 		return
 	# Accel
-	velocity.x = move_toward(velocity.x,MAX_SPEED * direction,ACCEL_SPEED * delta)
+	velocity.x = move_toward(velocity.x, MAX_SPEED * direction, ACCEL_SPEED * delta)
 	if sign(velocity.x) != sign(direction):
-		velocity.x = move_toward(velocity.x,MAX_SPEED * direction,friction * delta)
+		velocity.x = move_toward(velocity.x, MAX_SPEED * direction, friction * delta)
 
-func water_movement(direction:float, delta:float) -> void:
+
+func water_movement(direction: float, delta: float) -> void:
 	# Y axis Control
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -68,14 +70,16 @@ func water_movement(direction:float, delta:float) -> void:
 	# X axis Control
 	# Decel
 	if direction == 0:
-		velocity.x = move_toward(velocity.x,0,friction * delta)
+		velocity.x = move_toward(velocity.x, 0, friction * delta)
 		return
 	# Accel
-	velocity.x = move_toward(velocity.x,MAX_SPEED * direction,ACCEL_SPEED * delta)
+	velocity.x = move_toward(velocity.x, MAX_SPEED * direction, ACCEL_SPEED * delta)
 	if sign(velocity.x) != sign(direction):
-		velocity.x = move_toward(velocity.x,MAX_SPEED * direction,friction * delta)
+		velocity.x = move_toward(velocity.x, MAX_SPEED * direction, friction * delta)
 
-func fire_movement(direction:float, delta:float) -> void:
+
+
+func fire_movement(direction: float, delta: float) -> void:
 	# Y axis Control
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -85,14 +89,15 @@ func fire_movement(direction:float, delta:float) -> void:
 	# X axis Control
 	# Decel
 	if direction == 0:
-		velocity.x = move_toward(velocity.x,0,friction * delta)
+		velocity.x = move_toward(velocity.x, 0, friction * delta)
 		return
 	# Accel
-	velocity.x = move_toward(velocity.x,MAX_SPEED * direction,ACCEL_SPEED * delta)
+	velocity.x = move_toward(velocity.x, MAX_SPEED * direction, ACCEL_SPEED * delta)
 	if sign(velocity.x) != sign(direction):
-		velocity.x = move_toward(velocity.x,MAX_SPEED * direction,friction * delta)
+		velocity.x = move_toward(velocity.x, MAX_SPEED * direction, friction * delta)
 
-func earth_movement(direction:float, delta:float) -> void:
+
+func earth_movement(direction: float, delta: float) -> void:
 	# Y axis Control
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -101,14 +106,15 @@ func earth_movement(direction:float, delta:float) -> void:
 	# X axis Control
 	# Decel
 	if direction == 0:
-		velocity.x = move_toward(velocity.x,0,friction * delta)
+		velocity.x = move_toward(velocity.x, 0, friction * delta)
 		return
 	# Accel
-	velocity.x = move_toward(velocity.x,MAX_SPEED * direction,ACCEL_SPEED * delta)
+	velocity.x = move_toward(velocity.x, MAX_SPEED * direction, ACCEL_SPEED * delta)
 	if sign(velocity.x) != sign(direction):
-		velocity.x = move_toward(velocity.x,MAX_SPEED * direction,friction * delta)
+		velocity.x = move_toward(velocity.x, MAX_SPEED * direction, friction * delta)
 
-func lightning_movement(direction:float, delta:float) -> void:
+
+func lightning_movement(direction: float, delta: float) -> void:
 	# Y axis Control
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -118,19 +124,21 @@ func lightning_movement(direction:float, delta:float) -> void:
 	# X axis Control
 	# Decel
 	if direction == 0:
-		velocity.x = move_toward(velocity.x,0,friction * delta)
+		velocity.x = move_toward(velocity.x, 0, friction * delta)
 		return
 	# Accel
-	velocity.x = move_toward(velocity.x,MAX_SPEED * direction * 1.5,ACCEL_SPEED * delta * 1.25)
+	velocity.x = move_toward(velocity.x, MAX_SPEED * direction * 1.5, ACCEL_SPEED * delta * 1.25)
 	if sign(velocity.x) != sign(direction):
-		velocity.x = move_toward(velocity.x,MAX_SPEED * direction,friction * delta)
+		velocity.x = move_toward(velocity.x, MAX_SPEED * direction, friction * delta)
+
 
 func mod_camera(delta: float):
-	cam.offset = lerp(cam.offset,velocity / 2, delta * 4)
+	cam.offset = lerp(cam.offset, velocity / 2, delta * 4)
 	#cam.offset.x = move_toward(cam.offset.x,velocity.x /2,MAX_SPEED * delta * 3)
 	#cam.offset.y = move_toward(cam.offset.y,velocity.y /2,MAX_SPEED * delta * 3)
 	#if abs(cam.offset.y) > abs(velocity.y /3):
 	#	cam.offset.y == velocity.y /3
+
 
 func _on_switch_to_element(state: int) -> void:
 	print(state)
@@ -148,6 +156,7 @@ func _on_switch_to_element(state: int) -> void:
 		4:
 			element = "lightning"
 
+
 func _on_switch_to_state(state: int) -> void:
 	match state:
 		0:
@@ -156,6 +165,7 @@ func _on_switch_to_state(state: int) -> void:
 			current_state = "swimming"
 		2:
 			current_state = "attacking"
+
 
 func _on_hitbox_collision(area: Node2D) -> void:
 	if area.get_collision_layer_value(4) == true:
