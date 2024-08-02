@@ -12,6 +12,9 @@ var target_progress: float = 2.0
 var transitioning: bool = false
 
 var element: String = "neutral"
+
+
+signal switch_to_element
 # Switch to element after transition ends.
 #var element_in_queue: String = ""
 
@@ -79,14 +82,9 @@ func make_main():
 	main.z_index = 1
 
 func _on_switch_to_element(state: String) -> void:
-	print(state)
 	if transitioning == true:
-		#if element_in_queue == element:
-		#	return
-		#element_in_queue = state
 		return
-		#make_main()
-		#transitioning = false
+	switch_to_element.emit(state)
 	# Visual changes handled here.
 	# For mechanical changes, use the sprite main player script.
 	if state == element:

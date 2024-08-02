@@ -33,16 +33,6 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
-
-func _input(event: InputEvent) -> void:
-	# For things that don't need to be ran every frame or are tied to phyisics.
-	if Input.is_action_just_pressed("switchElement"):
-		$ElementSwitchGui.process_mode = Node.PROCESS_MODE_ALWAYS
-		$ElementSwitchGui.enable()
-
-		#get_tree().paused = true
-
-
 func neutral_movement(direction: float, delta: float) -> void:
 	# Y axis Control
 	if not is_on_floor():
@@ -76,8 +66,6 @@ func water_movement(direction: float, delta: float) -> void:
 	velocity.x = move_toward(velocity.x, MAX_SPEED * direction, ACCEL_SPEED * delta)
 	if sign(velocity.x) != sign(direction):
 		velocity.x = move_toward(velocity.x, MAX_SPEED * direction, friction * delta)
-
-
 
 func fire_movement(direction: float, delta: float) -> void:
 	# Y axis Control
