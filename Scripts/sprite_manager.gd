@@ -106,7 +106,7 @@ func _on_switch_to_element(state: String) -> void:
 			trans = generate_sprite2d("res://icon.svg",Color(1,0,0,1))
 			main.set_material(firetrans)
 			main.material.set_shader_parameter("progress", -1)
-			target_progress = 1.8
+			target_progress = 1.7
 		"earth":
 			element = "earth"
 			trans = generate_sprite2d("res://icon.svg",Color(0,1,0,1))
