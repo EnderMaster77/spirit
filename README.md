@@ -1,11 +1,10 @@
 # Spirit
 
-Spirit is a FOSS game made with Godot Engine. The general concept is that you play as a spirit who can change what element they control, which affects how they interact with their surroundings. At the moment, the direction this game should go in is a bit muddy. There's a few paths this game might go:
- - A metroidvania
- - A puzzle game
- - Any other genre if the suggestion is good enough.
+Spirit is a metroidvania made with Godot Engine. The general concept is that you play as a spirit who can change what element they control, which affects how they interact with their surroundings. At the moment, the direction this game should go in is a bit muddy. There's a few paths this game might go.
 
+## Direction
 
+While it is very early in development, I believe I should establish goals before the bulk of design starts. Everything should follow a common theme, to which the game builds towards.
 
 ## Backstory of Spirit
 
