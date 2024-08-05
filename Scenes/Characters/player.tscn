@@ -1,12 +1,12 @@
 [gd_scene load_steps=12 format=3 uid="uid://c7xm82uma1fy7"]
 
-[ext_resource type="Script" path="res://Scripts/player.gd" id="1_1q7we"]
+[ext_resource type="Script" path="res://Scripts/Player/player.gd" id="1_1q7we"]
 [ext_resource type="Texture2D" uid="uid://cjht8i8qljuta" path="res://icon.svg" id="1_2slvi"]
-[ext_resource type="Script" path="res://Scripts/EffectController.gd" id="3_mo646"]
-[ext_resource type="Shader" path="res://Shaders/blur.gdshader" id="3_n5rs3"]
-[ext_resource type="Script" path="res://Scripts/element_switch_gui.gd" id="5_qyee1"]
-[ext_resource type="PackedScene" uid="uid://gx1hsdoudys" path="res://Scenes/GUIs/debug_gui.tscn" id="6_ofnd2"]
-[ext_resource type="Script" path="res://Scripts/sprite_manager.gd" id="8_mccy3"]
+[ext_resource type="Script" path="res://Scripts/Player/effectController.gd" id="3_mo646"]
+[ext_resource type="Shader" path="res://Shaders/GUI FX/blur.gdshader" id="3_n5rs3"]
+[ext_resource type="Script" path="res://Scripts/Player/elementSwitchManager.gd" id="5_qyee1"]
+[ext_resource type="PackedScene" uid="uid://gx1hsdoudys" path="res://Scenes/GUIs/debugGUI.tscn" id="6_ofnd2"]
+[ext_resource type="Script" path="res://Scripts/Player/spriteManager.gd" id="8_mccy3"]
 [ext_resource type="Material" uid="uid://bewkrxpl1lgge" path="res://Shaders/ShaderMaterials/neutraltransition.tres" id="9_7318l"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kgxqf"]
@@ -38,7 +38,7 @@ material = SubResource("ShaderMaterial_xp3ao")
 position = Vector2(960, 540)
 texture = SubResource("PlaceholderTexture2D_bfckg")
 
-[node name="ElementSwitchGui" type="Node2D" parent="."]
+[node name="ElementSwitchMan" type="Node2D" parent="."]
 script = ExtResource("5_qyee1")
 
 [node name="Area2D" type="Area2D" parent="."]
@@ -58,7 +58,7 @@ z_index = 1
 material = ExtResource("9_7318l")
 texture = ExtResource("1_2slvi")
 
-[connection signal="switch_to_element" from="ElementSwitchGui" to="SpriteManager" method="_on_switch_to_element"]
+[connection signal="switch_to_element" from="ElementSwitchMan" to="SpriteManager" method="_on_switch_to_element"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_hitbox_collision"]
 [connection signal="body_entered" from="Area2D" to="." method="_on_hitbox_collision"]
 [connection signal="switch_to_element" from="SpriteManager" to="." method="_on_switch_to_state"]

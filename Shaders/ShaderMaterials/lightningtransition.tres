@@ -1,6 +1,6 @@
 [gd_resource type="ShaderMaterial" load_steps=5 format=3 uid="uid://baebtnecncwi2"]
 
-[ext_resource type="Shader" path="res://Shaders/lightning.tres.gdshader" id="1_apiwn"]
+[ext_resource type="Shader" path="res://Shaders/Element FX/lightning.tres.gdshader" id="1_apiwn"]
 
 [sub_resource type="Gradient" id="Gradient_rwe5i"]
 offsets = PackedFloat32Array(0, 0.119718, 0.45082, 0.514085, 0.983607, 0.991803, 1)
