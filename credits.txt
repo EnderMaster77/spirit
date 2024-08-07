@@ -1,0 +1,4 @@
+This file will be used for tracking contributers and external tools or assets, like addons or art. If you are contributing to Spirit, feel free to add your name below with your contribution.
+EnderMaster08 | Lead Developer
+Dimforge | Rapier Physics addon
+KoBeWi | MetSys addon

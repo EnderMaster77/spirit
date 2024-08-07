@@ -8,12 +8,20 @@
 
 config_version=5
 
+[addons]
+
+metroidvania_system/settings_file="res://MetSysSettings.tres"
+
 [application]
 
 config/name="Spirit"
 run/main_scene="res://Scenes/Levels/testScene.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
+
+[autoload]
+
+MetSys="*res://addons/MetroidvaniaSystem/Nodes/Singleton.tscn"
 
 [display]
 
@@ -29,7 +37,7 @@ version_control/autoload_on_startup=true
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/gdscript_formatter/plugin.cfg")
+enabled=PackedStringArray("res://addons/MetroidvaniaSystem/EditorExtension/plugin.cfg", "res://addons/MetroidvaniaSystem/plugin.cfg")
 
 [input]
 

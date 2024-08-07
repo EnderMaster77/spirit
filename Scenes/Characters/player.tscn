@@ -49,6 +49,7 @@ collision_mask = 255
 shape = SubResource("RectangleShape2D_kgxqf")
 
 [node name="DebugGui" parent="." instance=ExtResource("6_ofnd2")]
+script = null
 
 [node name="SpriteManager" type="Node2D" parent="."]
 script = ExtResource("8_mccy3")
