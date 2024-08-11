@@ -1,38 +1,26 @@
-[gd_scene load_steps=2 format=3 uid="uid://gx1hsdoudys"]
+[gd_scene load_steps=2 format=3 uid="uid://kl5rsqrfjjgj"]
 
-[ext_resource type="Script" path="res://Scripts/UI/debugGUI.gd" id="1_s83w3"]
+[ext_resource type="Script" path="res://Scripts/UI/canvas_layer.gd" id="1_glctq"]
 
-[node name="DebugGui" type="CanvasLayer"]
-script = ExtResource("1_s83w3")
+[node name="CanvasLayer" type="CanvasLayer" node_paths=PackedStringArray("player")]
+script = ExtResource("1_glctq")
+player = NodePath("")
 
-[node name="Panel" type="Panel" parent="."]
-offset_right = 639.0
-offset_bottom = 96.0
+[node name="PanelContainer" type="PanelContainer" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
 
-[node name="Velocity" type="Label" parent="Panel"]
-layout_mode = 0
-offset_right = 637.0
-offset_bottom = 23.0
-text = "Velocity:"
+[node name="ItemList" type="VBoxContainer" parent="PanelContainer"]
+layout_mode = 2
 
-[node name="FPS" type="Label" parent="Panel"]
-layout_mode = 0
-offset_top = 21.0
-offset_right = 630.0
-offset_bottom = 44.0
-text = "FPS:"
+[node name="pos" type="Label" parent="PanelContainer/ItemList"]
+layout_mode = 2
+text = "Position: (X,Y)"
 
-[node name="mainMod" type="Label" parent="Panel"]
-layout_mode = 0
-offset_top = 45.0
-offset_right = 637.0
-offset_bottom = 68.0
-text = "MainMod:"
+[node name="vel" type="Label" parent="PanelContainer/ItemList"]
+layout_mode = 2
+text = "Velocity: (X,Y)"
 
-[node name="transMod" type="Label" parent="Panel"]
-layout_mode = 0
-offset_left = -1.0
-offset_top = 72.0
-offset_right = 636.0
-offset_bottom = 95.0
-text = "TransMod:"
+[node name="fps" type="Label" parent="PanelContainer/ItemList"]
+layout_mode = 2
+text = "FPS: 144"

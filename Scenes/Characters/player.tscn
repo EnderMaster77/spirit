@@ -5,7 +5,7 @@
 [ext_resource type="Script" path="res://Scripts/Player/effectController.gd" id="3_mo646"]
 [ext_resource type="Shader" path="res://Shaders/GUI FX/blur.gdshader" id="3_n5rs3"]
 [ext_resource type="Script" path="res://Scripts/Player/elementSwitchManager.gd" id="5_qyee1"]
-[ext_resource type="PackedScene" uid="uid://gx1hsdoudys" path="res://Scenes/GUIs/debugGUI.tscn" id="6_ofnd2"]
+[ext_resource type="PackedScene" uid="uid://kl5rsqrfjjgj" path="res://Scenes/GUIs/debugGUI.tscn" id="6_ofnd2"]
 [ext_resource type="Script" path="res://Scripts/Player/spriteManager.gd" id="8_mccy3"]
 [ext_resource type="Material" uid="uid://bewkrxpl1lgge" path="res://Shaders/ShaderMaterials/neutraltransition.tres" id="9_7318l"]
 
@@ -48,9 +48,6 @@ collision_mask = 255
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_kgxqf")
 
-[node name="DebugGui" parent="." instance=ExtResource("6_ofnd2")]
-script = null
-
 [node name="SpriteManager" type="Node2D" parent="."]
 script = ExtResource("8_mccy3")
 
@@ -58,6 +55,10 @@ script = ExtResource("8_mccy3")
 z_index = 1
 material = ExtResource("9_7318l")
 texture = ExtResource("1_2slvi")
+
+[node name="DebugGui" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_ofnd2")]
+visible = false
+player = NodePath("..")
 
 [connection signal="switch_to_element" from="ElementSwitchMan" to="SpriteManager" method="_on_switch_to_element"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_hitbox_collision"]
