@@ -6,7 +6,16 @@ extends Resource
 class_name MapTheme
 
 const SQUARE_BORDERS = ["wall", "passage", "separator", "borders"]
-const RECTANGLE_BORDERS = ["vertical_wall", "horizontal_wall", "vertical_passage", "horizontal_passage", "vertical_separator", "horizontal_separator", "vertical_borders", "horizontal_borders"]
+const RECTANGLE_BORDERS = [
+	"vertical_wall",
+	"horizontal_wall",
+	"vertical_passage",
+	"horizontal_passage",
+	"vertical_separator",
+	"horizontal_separator",
+	"vertical_borders",
+	"horizontal_borders"
+]
 const DEFAULT_CORNERS = ["inner_corner", "outer_corner"]
 const SHARED_CORNERS = ["u_corner", "l_corner", "t_corner", "cross_corner"]
 
@@ -111,6 +120,7 @@ enum SeparatorMode {
 
 var rectangle: bool
 
+
 func _validate_property(property: Dictionary) -> void:
 	if rectangle:
 		if property.name in SQUARE_BORDERS:
@@ -120,7 +130,7 @@ func _validate_property(property: Dictionary) -> void:
 		if property.name in RECTANGLE_BORDERS:
 			property.usage = 0
 			return
-	
+
 	if use_shared_borders:
 		if property.name in DEFAULT_CORNERS:
 			property.usage = 0
@@ -130,30 +140,32 @@ func _validate_property(property: Dictionary) -> void:
 			property.usage = 0
 			return
 
+
 func is_unicorner() -> bool:
 	if use_shared_borders:
 		return l_corner == u_corner and t_corner == u_corner and cross_corner == u_corner
 	else:
 		return inner_corner == outer_corner
 
+
 func check_for_changes(prev_state: Array) -> Array[String]:
 	var new_state: Array
 	var changed: Array[String]
-	
+
 	var properties := get_property_list()
 	for property in properties:
 		new_state.append(get(property.name))
 		if changed:
 			continue
-		
+
 		var idx := new_state.size() - 1
 		if idx >= prev_state.size():
 			continue
-		
+
 		if new_state[idx] != prev_state[idx]:
 			changed.append(property.name)
-	
+
 	if not changed.is_empty() or prev_state.size() != new_state.size():
 		prev_state.assign(new_state)
-	
+
 	return changed

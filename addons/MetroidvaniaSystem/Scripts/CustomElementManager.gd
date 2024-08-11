@@ -7,6 +7,7 @@ extends RefCounted
 
 var custom_elements: Dictionary
 
+
 ## Registers a new element. The [param name] will appear in the editor (capitalized) and [param draw_callback] will be used to draw your element. The callback is called automatically when the element needs to be drawn.
 ## [br][br]The callback signature is [code]method(canvas_item: CanvasItem, coords: Vector3i, pos: Vector2, size: Vector2, data: String)[/code]. [code]canvas_item[/code] is the [CanvasItem] that you should use to draw the elements, [code]coords[/code] are the coordinates of the origin point of the element, [code]pos[/code] is the position of the element's origin in pixels, [code]size[/code] is the size of the element's rectangle in pixels, [code]data[/code] is the data [String] that was assigned to the element.
 ## [br][br]Example draw callback that draws a label if the cell was discovered:
@@ -20,6 +21,14 @@ var custom_elements: Dictionary
 func register_element(name: String, draw_callback: Callable):
 	custom_elements[name.replace("/", "_")] = draw_callback
 
-func draw_element(canvas_item: CanvasItem, coords: Vector3i, name: String, pos: Vector2, size: Vector2, data: String):
+
+func draw_element(
+	canvas_item: CanvasItem,
+	coords: Vector3i,
+	name: String,
+	pos: Vector2,
+	size: Vector2,
+	data: String
+):
 	var callback: Callable = custom_elements[name]
 	callback.call(canvas_item, coords, pos, size, data)

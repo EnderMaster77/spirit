@@ -33,6 +33,7 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
+
 func neutral_movement(direction: float, delta: float) -> void:
 	# Y axis Control
 	if not is_on_floor():
@@ -66,6 +67,7 @@ func water_movement(direction: float, delta: float) -> void:
 	velocity.x = move_toward(velocity.x, MAX_SPEED * direction, ACCEL_SPEED * delta)
 	if sign(velocity.x) != sign(direction):
 		velocity.x = move_toward(velocity.x, MAX_SPEED * direction, friction * delta)
+
 
 func fire_movement(direction: float, delta: float) -> void:
 	# Y axis Control

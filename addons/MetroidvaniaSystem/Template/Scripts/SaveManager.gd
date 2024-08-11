@@ -13,43 +13,53 @@ extends RefCounted
 
 var data: Dictionary
 
+
 ## Stores the value in the internal [Dictionary]. Call it to set the data you want saved. Only supports non-[Object] values.
 func set_value(field: String, value: Variant):
 	data[field] = value
+
 
 ## Retrieves the value from the internal [Dictionary]. Works the same as [method Dictionary.get]. You need to load the data before calling this.
 func get_value(field: String, default = null) -> Variant:
 	return data.get(field, default)
 
+
 ## Stores save data of a MetSys game object or other object with get_save_data() method. Allows for easier storing of game data, especially when you have game modules with save data. Only one such object can be stored in the save file.
 func store_game(game):
 	data["_MetSysGame_"] = game.get_save_data()
+
 
 ## Retrieves save data of a MetSys game object or other object with set_save_data() method.
 func retrieve_game(game):
 	var game_data: Dictionary = data.get("_MetSysGame_", {})
 	game.set_save_data(game_data)
 
+
 ## Stores a [Resource] by dumping its properties into a [Dictionary]. [param field] can be optionally provided to store the data in a nested [Dictionary]. If it's not provided, the resource's data will be mixed with the main data.
 ## [br][br]Just like with [method set_value], the resource's properties can't have [Object] values.
 func store_resource(res: Resource, field := ""):
 	var subdata: Dictionary
-	
+
 	for property in res.get_property_list():
 		if not property["usage"] & PROPERTY_USAGE_STORAGE:
 			continue
-		
+
 		var property_name: String = property["name"]
-		
-		if property_name == "resource_local_to_scene" or property_name == "resource_name" or property_name == "script":
+
+		if (
+			property_name == "resource_local_to_scene"
+			or property_name == "resource_name"
+			or property_name == "script"
+		):
 			continue
-		
+
 		subdata[property_name] = res.get(property_name)
-	
+
 	if field.is_empty():
 		data.merge(subdata)
 	else:
 		data[field] = subdata
+
 
 ## Loads the data back into the resource. Requires an instance created beforehand. [param field] must be the same as used with [method store_resource].
 ## [codeblock]
@@ -62,17 +72,18 @@ func retrieve_resource(res: Resource, field := ""):
 	var subdata := data
 	if not field.is_empty():
 		subdata = data.get(field, {})
-	
+
 	for property in res.get_property_list():
 		if not property["usage"] & PROPERTY_USAGE_STORAGE:
 			continue
-		
+
 		var property_name: String = property["name"]
-		
+
 		if not property_name in subdata:
 			continue
-		
+
 		res.set(property_name, subdata[property_name])
+
 
 ## Stores the data as text using [method @GlobalScope.var_to_str] and [method FileAccess.store_string].
 func save_as_text(path: String):
@@ -81,19 +92,21 @@ func save_as_text(path: String):
 		return
 	file.store_string(var_to_str(data))
 
+
 ## Loads a text saved data. The data can be then retrieved using [method get_value].
 func load_from_text(path: String):
 	var file := _setup_load(path)
 	if not file:
 		return
-	
+
 	var loaded_data = str_to_var(file.get_as_text())
 	if not loaded_data is Dictionary:
-		push_error("Failed to load text data from file \"%s\"." % path)
+		push_error('Failed to load text data from file "%s".' % path)
 		return
-	
+
 	data = loaded_data
 	MetSys.set_save_data(data)
+
 
 ## Stores the data as binary using [method FileAccess.store_var].
 func save_as_binary(path: String):
@@ -102,24 +115,27 @@ func save_as_binary(path: String):
 		return
 	file.store_var(data)
 
+
 ## Loads a binary saved data. The data can be then retrieved using [method get_value].
 func load_from_binary(path: String):
 	var file := _setup_load(path)
 	if not file:
 		return
-	
+
 	var loaded_data = file.get_var()
 	if not loaded_data is Dictionary:
-		push_error("Failed to load binary data from file \"%s\"." % path)
+		push_error('Failed to load binary data from file "%s".' % path)
 		return
-	
+
 	data = loaded_data
 	MetSys.set_save_data(data)
+
 
 ## Stores the data as text using [method @GlobalScope.var_to_str], returning the resulting [String]. Use it if you can't use the file methods for some reason.
 func save_as_string() -> String:
 	data.merge(MetSys.get_save_data())
 	return var_to_str(data)
+
 
 ## Loads a text saved data from the provided [String] (it must have been created with [method save_as_string]). The data can be then retrieved using [method get_value].
 func load_from_string(string: String):
@@ -127,20 +143,24 @@ func load_from_string(string: String):
 	if not loaded_data is Dictionary:
 		push_error("Failed to load data from string.")
 		return
-	
+
 	data = loaded_data
 	MetSys.set_save_data(data)
 
+
 func _setup_save(path: String) -> FileAccess:
 	data.merge(MetSys.get_save_data())
-	
+
 	var file := FileAccess.open(path, FileAccess.WRITE)
 	if not file:
-		push_error("Failed to write save file \"%s\"! Error %d." % [path, FileAccess.get_open_error()])
+		push_error(
+			'Failed to write save file "%s"! Error %d.' % [path, FileAccess.get_open_error()]
+		)
 	return file
+
 
 func _setup_load(path: String) -> FileAccess:
 	var file := FileAccess.open(path, FileAccess.READ)
 	if not file:
-		push_error("Failed to load save file \"%s\"! Error %d." % [path, FileAccess.get_open_error()])
+		push_error('Failed to load save file "%s"! Error %d.' % [path, FileAccess.get_open_error()])
 	return file
