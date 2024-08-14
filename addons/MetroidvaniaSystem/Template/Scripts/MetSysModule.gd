@@ -9,20 +9,16 @@ const MetSysGame = preload("res://addons/MetroidvaniaSystem/Template/Scripts/Met
 ## Reference to the MetSysGame instance where this module was installed.
 var game: MetSysGame
 
-
 func _init(p_game: MetSysGame) -> void:
 	game = p_game
 	_initialize()
 
-
 func _initialize():
 	pass
-
 
 ## Called when MetSysGame data is saved via SaveManager.store_game(). Use it to return the data you want saved for this module.
 func _get_save_data() -> Dictionary:
 	return {}
-
 
 ## Called when MetSysGame data is restored via SaveManager.retrieve_game(). [param data] will contain your stored save data (note that it's merged with other modules).
 func _set_save_data(data: Dictionary):

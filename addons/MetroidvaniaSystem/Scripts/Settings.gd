@@ -6,7 +6,7 @@ extends Resource
 	set(t):
 		if t == theme:
 			return
-
+		
 		theme = t
 		theme_changed.emit()
 
@@ -32,13 +32,13 @@ extends Resource
 	set(elements):
 		if elements == custom_element_script:
 			return
-
+		
 		custom_element_script = elements
 		if elements:
 			custom_elements = elements.new()
 		else:
 			custom_elements = null
-
+		
 		custom_elements_changed.emit()
 
 @export var collectible_list: Array[Dictionary]
@@ -48,7 +48,6 @@ var custom_elements: MetroidvaniaSystem.CustomElementManager
 
 signal theme_changed
 signal custom_elements_changed
-
 
 func _validate_property(property: Dictionary) -> void:
 	if property.name == "collectible_list" or property.name == "assign_uid_to_rooms":

@@ -1,13 +1,14 @@
-[gd_scene load_steps=12 format=3 uid="uid://c7xm82uma1fy7"]
+[gd_scene load_steps=13 format=3 uid="uid://c7xm82uma1fy7"]
 
 [ext_resource type="Script" path="res://Scripts/Player/player.gd" id="1_1q7we"]
-[ext_resource type="Texture2D" uid="uid://b2oxnhw40oebb" path="res://icon.svg" id="1_2slvi"]
 [ext_resource type="Script" path="res://Scripts/Player/effectController.gd" id="3_mo646"]
 [ext_resource type="Shader" path="res://Shaders/GUI FX/blur.gdshader" id="3_n5rs3"]
 [ext_resource type="Script" path="res://Scripts/Player/elementSwitchManager.gd" id="5_qyee1"]
 [ext_resource type="PackedScene" uid="uid://kl5rsqrfjjgj" path="res://Scenes/GUIs/debugGUI.tscn" id="6_ofnd2"]
+[ext_resource type="Texture2D" uid="uid://bw1ddd8mpx7t7" path="res://icon.png" id="7_i3ybo"]
 [ext_resource type="Script" path="res://Scripts/Player/spriteManager.gd" id="8_mccy3"]
 [ext_resource type="Material" uid="uid://bewkrxpl1lgge" path="res://Shaders/ShaderMaterials/neutraltransition.tres" id="9_7318l"]
+[ext_resource type="PackedScene" uid="uid://dch8dyylb7526" path="res://addons/MetroidvaniaSystem/Template/Nodes/Minimap.tscn" id="9_wmh3s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kgxqf"]
 size = Vector2(128, 128)
@@ -26,6 +27,7 @@ script = ExtResource("1_1q7we")
 shape = SubResource("RectangleShape2D_kgxqf")
 
 [node name="Camera2D" type="Camera2D" parent="."]
+physics_interpolation_mode = 1
 zoom = Vector2(0.75, 0.75)
 
 [node name="FXman" type="CanvasLayer" parent="."]
@@ -54,11 +56,16 @@ script = ExtResource("8_mccy3")
 [node name="Main" type="Sprite2D" parent="SpriteManager"]
 z_index = 1
 material = ExtResource("9_7318l")
-texture = ExtResource("1_2slvi")
+texture = ExtResource("7_i3ybo")
 
 [node name="DebugGui" parent="." node_paths=PackedStringArray("player") instance=ExtResource("6_ofnd2")]
 visible = false
 player = NodePath("..")
+
+[node name="UI" type="CanvasLayer" parent="."]
+
+[node name="Minimap" parent="UI" instance=ExtResource("9_wmh3s")]
+offset_right = 96.0
 
 [connection signal="switch_to_element" from="ElementSwitchMan" to="SpriteManager" method="_on_switch_to_element"]
 [connection signal="area_entered" from="Area2D" to="." method="_on_hitbox_collision"]

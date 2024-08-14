@@ -123,8 +123,19 @@ func lightning_movement(direction: float, delta: float) -> void:
 
 
 func mod_camera(delta: float):
-	cam.offset = lerp(cam.offset, velocity / 2, delta * 4)
-	#cam.offset.x = move_toward(cam.offset.x,velocity.x /2,MAX_SPEED * delta * 3)
+	if velocity.x != 0:
+		cam.position.x += velocity.x * delta /2
+	cam.position.x = clampf(cam.position.x, -300, 300)
+	#var cammod:Vector2 = Vector2((get_viewport_rect().size.x/2) / cam.zoom.x,(get_viewport_rect().size.y/2) / cam.zoom.y)
+	# Detects if camera is outside limit. I'm probably going to be told there's a much easier way to do this.
+	#cam.position.x = lerpf(cam.position.x, velocity.x / 2, delta * 4)
+	#if abs(cam.position.x + 0.02) >= 500:
+	#			cam.position.x = velocity.x / 2
+	#cam.position.y = lerpf(cam.position.y, velocity.y / 2, delta * 4)
+
+	#if abs(cam.position.y) - 0.1 >= abs(velocity.y / 2):
+	#	cam.position.y = velocity.y / 2
+		#cam.offset.x = move_toward(cam.offset.x,velocity.x /2,MAX_SPEED * delta * 3)
 	#cam.offset.y = move_toward(cam.offset.y,velocity.y /2,MAX_SPEED * delta * 3)
 	#if abs(cam.offset.y) > abs(velocity.y /3):
 	#	cam.offset.y == velocity.y /3
@@ -160,3 +171,7 @@ func _on_switch_to_state(state: int) -> void:
 func _on_hitbox_collision(area: Node2D) -> void:
 	if area.get_collision_layer_value(4) == true:
 		pass
+
+
+func on_enter():
+	pass

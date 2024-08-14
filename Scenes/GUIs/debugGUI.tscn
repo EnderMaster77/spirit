@@ -2,11 +2,11 @@
 
 [ext_resource type="Script" path="res://Scripts/UI/canvas_layer.gd" id="1_glctq"]
 
-[node name="CanvasLayer" type="CanvasLayer" node_paths=PackedStringArray("player")]
+[node name="CanvasLayer" type="CanvasLayer"]
 script = ExtResource("1_glctq")
-player = NodePath("")
 
 [node name="PanelContainer" type="PanelContainer" parent="."]
+custom_minimum_size = Vector2(220, 0)
 offset_right = 40.0
 offset_bottom = 40.0
 

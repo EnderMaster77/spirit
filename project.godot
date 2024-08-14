@@ -15,14 +15,13 @@ metroidvania_system/settings_file="res://MetSysSettings.tres"
 [application]
 
 config/name="Spirit"
-run/main_scene="res://Scenes/Levels/testScene.tscn"
+run/main_scene="res://Scenes/game.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
 MetSys="*res://addons/MetroidvaniaSystem/Nodes/Singleton.tscn"
-BetterTerrain="*res://addons/better-terrain/BetterTerrain.gd"
 
 [display]
 
@@ -123,3 +122,7 @@ switchToEarth={
 
 2d/run_on_separate_thread=true
 2d/physics_engine="Rapier2D"
+
+[rendering]
+
+driver/threads/thread_model=2

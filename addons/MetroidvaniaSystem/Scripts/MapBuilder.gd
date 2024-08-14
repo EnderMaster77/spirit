@@ -8,13 +8,11 @@ extends RefCounted
 ## The cells created with this MapBuilder.
 var cells: Array[MetroidvaniaSystem.MapData.CellOverride]
 
-
 ## Creates a new cell on the world map and returns a CellOverride that can be used to customize the cell. You can destroy created cells using their [code]destroy()[/code] method.
 func create_cell(at: Vector3i) -> MetroidvaniaSystem.MapData.CellOverride:
 	var cell: MetroidvaniaSystem.MapData.CellOverride = MetSys.map_data.create_custom_cell(at)
 	cells.append(cell)
 	return cell
-
 
 ## Requests the world map update. This simply emits [signal MetroidvaniaSystem.map_updated]. The signal is not emitted automatically when customizing the cells, unlike regular overrides. Updating the map in batches is more efficient.
 func update_map():
