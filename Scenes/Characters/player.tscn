@@ -11,7 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://dch8dyylb7526" path="res://addons/MetroidvaniaSystem/Template/Nodes/Minimap.tscn" id="9_wmh3s"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kgxqf"]
-size = Vector2(124, 128)
+size = Vector2(116, 128)
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xp3ao"]
 shader = ExtResource("3_n5rs3")

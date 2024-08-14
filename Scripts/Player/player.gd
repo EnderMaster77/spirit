@@ -28,7 +28,7 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	var direction := Input.get_axis("left", "right")
-	# Calls the current element's Movement function automatically.
+	# Calls the current element's Movement function automatically without if/else statements.
 	call(element + "_movement", direction, delta)
 
 	move_and_slide()
