@@ -1,0 +1,19 @@
+[gd_scene load_steps=5 format=3 uid="uid://dvfqv52kflysc"]
+
+[ext_resource type="Shader" path="res://Assets/UI/Map/PlayerIcon.gdshader" id="1_v4xe7"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c0x6v"]
+shader = ExtResource("1_v4xe7")
+
+[sub_resource type="Gradient" id="Gradient_8g8km"]
+offsets = PackedFloat32Array(0, 0.0220126)
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_c1df2"]
+gradient = SubResource("Gradient_8g8km")
+width = 32
+height = 32
+
+[node name="PlayerIcon" type="Sprite2D"]
+material = SubResource("ShaderMaterial_c0x6v")
+texture = SubResource("GradientTexture2D_c1df2")

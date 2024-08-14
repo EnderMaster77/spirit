@@ -9,4 +9,9 @@ starting_map = "testScene.tscn"
 
 [node name="Player" parent="." instance=ExtResource("2_ynl4w")]
 
+[node name="Minimap" parent="Player/UI" index="0"]
+smooth_scroll = false
+display_player_location = true
+area = Vector2i(7, 7)
+
 [editable path="Player"]
