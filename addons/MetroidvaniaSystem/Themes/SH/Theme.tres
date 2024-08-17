@@ -1,9 +1,12 @@
-[gd_resource type="Resource" script_class="MapTheme" load_steps=18 format=3 uid="uid://y6u67cfpuogf"]
+[gd_resource type="Resource" script_class="MapTheme" load_steps=21 format=3 uid="uid://y6u67cfpuogf"]
 
 [ext_resource type="Script" path="res://addons/MetroidvaniaSystem/Scripts/MapTheme.gd" id="1_4j04x"]
+[ext_resource type="Texture2D" uid="uid://cn8q3u8x5x76" path="res://addons/MetroidvaniaSystem/Themes/SH/DoorPassage.png" id="1_bceuj"]
 [ext_resource type="Texture2D" uid="uid://snjt7cvsgvvy" path="res://addons/MetroidvaniaSystem/Themes/SH/RoomFill.png" id="1_hultg"]
 [ext_resource type="Texture2D" uid="uid://d3rrhbvssnbxq" path="res://addons/MetroidvaniaSystem/Themes/SH/CornerInner.png" id="2_4n12c"]
+[ext_resource type="Texture2D" uid="uid://b0mea0cr111la" path="res://addons/MetroidvaniaSystem/Themes/SH/UnchargedDoor.png" id="2_g5qnh"]
 [ext_resource type="Texture2D" uid="uid://dmllf41qywe3y" path="res://addons/MetroidvaniaSystem/Themes/SH/CornerOuter.png" id="3_8brxa"]
+[ext_resource type="Texture2D" uid="uid://n6xjcxp7wgwl" path="res://addons/MetroidvaniaSystem/Themes/SH/LightningDoor.png" id="3_k6qqq"]
 [ext_resource type="Texture2D" uid="uid://dijwr20xrmclc" path="res://addons/MetroidvaniaSystem/Themes/SH/BorderPassage.png" id="4_vsud1"]
 [ext_resource type="PackedScene" uid="uid://dvfqv52kflysc" path="res://Assets/UI/Map/PlayerIcon.tscn" id="5_8yppm"]
 [ext_resource type="Texture2D" uid="uid://d0psb5m4yj18w" path="res://addons/MetroidvaniaSystem/Themes/SH/RoomSeparator.png" id="6_26h26"]
@@ -36,6 +39,6 @@ collected_item_symbol = -1
 wall = ExtResource("7_e7jql")
 passage = ExtResource("4_vsud1")
 separator = ExtResource("6_26h26")
-borders = Array[Texture2D]([])
+borders = Array[Texture2D]([ExtResource("1_bceuj"), ExtResource("2_g5qnh"), ExtResource("3_k6qqq")])
 outer_corner = ExtResource("3_8brxa")
 inner_corner = ExtResource("2_4n12c")

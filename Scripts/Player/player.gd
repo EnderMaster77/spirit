@@ -4,7 +4,11 @@ const MAX_SPEED: float = 1000.0
 const ACCEL_SPEED: float = 2250
 const JUMP_VELOCITY: float = -400.0
 const DEFAULT_FRICTION: float = 5000
+const MAX_FALL_SPEED: float = 2500
+const FALL_SPEED:float = 1960
 var friction: float
+
+var jumping:bool = false
 
 @onready var Fxman: FXmanager = $FXman
 
@@ -36,10 +40,19 @@ func _physics_process(delta: float) -> void:
 
 func neutral_movement(direction: float, delta: float) -> void:
 	# Y axis Control
+	# I should probably redo this later. It runs the same check twice.
 	if not is_on_floor():
-		velocity += get_gravity() * delta
+		velocity.y += FALL_SPEED * delta
 	elif Input.is_action_just_pressed("jump"):
-		velocity.y = JUMP_VELOCITY
+		velocity.y = JUMP_VELOCITY * 2.5
+		jumping = true
+	if Input.is_action_just_released("jump") && jumping == true && velocity.y < 0:
+		velocity.y /= 5
+		jumping = false
+	if Input.is_action_pressed("down"):
+		velocity.y += FALL_SPEED * delta * 2
+	velocity.y = clampf(velocity.y,-9999,MAX_FALL_SPEED)
+		#velocity += get_gravity() * delta
 	# X axis Control
 	# Decel
 	if direction == 0:
@@ -123,10 +136,7 @@ func lightning_movement(direction: float, delta: float) -> void:
 
 
 func mod_camera(delta: float):
-	if velocity.x != 0:
-		cam.position.x += velocity.x * delta /2
-	cam.position.x = clampf(cam.position.x, -300, 300)
-	#var cammod:Vector2 = Vector2((get_viewport_rect().size.x/2) / cam.zoom.x,(get_viewport_rect().size.y/2) / cam.zoom.y)
+	pass#var cammod:Vector2 = Vector2((get_viewport_rect().size.x/2) / cam.zoom.x,(get_viewport_rect().size.y/2) / cam.zoom.y)
 	# Detects if camera is outside limit. I'm probably going to be told there's a much easier way to do this.
 	#cam.position.x = lerpf(cam.position.x, velocity.x / 2, delta * 4)
 	#if abs(cam.position.x + 0.02) >= 500:
@@ -141,20 +151,20 @@ func mod_camera(delta: float):
 	#	cam.offset.y == velocity.y /3
 
 
-func _on_switch_to_element(state: int) -> void:
+func _on_switch_to_element(state: String) -> void:
 	print(state)
 	# Mechanical changes handled here.
 	# For visual changes, use the sprite manager.
 	match state:
-		0:
+		"neutral":
 			element = "neutral"
-		1:
+		"water":
 			element = "water"
-		2:
+		"fire":
 			element = "fire"
-		3:
+		"earth":
 			element = "earth"
-		4:
+		"lightning":
 			element = "lightning"
 
 
@@ -174,4 +184,5 @@ func _on_hitbox_collision(area: Node2D) -> void:
 
 
 func on_enter():
-	pass
+	MetSys.get_current_room_instance().adjust_camera_limits(cam)
+	print(global_position)

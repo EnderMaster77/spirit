@@ -1,4 +1,4 @@
-# This is the main script of the game. It manages the current map and some other stuff.
+# This is the main script of the CameraPlusanages the current map and some other stuff.
 extends "res://addons/MetroidvaniaSystem/Template/Scripts/MetSysGame.gd"
 class_name Game
 
@@ -81,5 +81,5 @@ func save_game():
 #	$UI/MapWindow.reset_starting_coords()
 
 func init_room():
-	MetSys.get_current_room_instance().adjust_camera_limits($Player/Camera2D)
 	player.on_enter()
+	MetSys.get_current_room_instance().adjust_camera_limits($Player/Camera2D)

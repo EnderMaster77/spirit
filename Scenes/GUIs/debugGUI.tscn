@@ -24,3 +24,41 @@ text = "Velocity: (X,Y)"
 [node name="fps" type="Label" parent="PanelContainer/ItemList"]
 layout_mode = 2
 text = "FPS: 144"
+
+[node name="CheckBox" type="CheckBox" parent="PanelContainer/ItemList"]
+layout_mode = 2
+text = "Freecam"
+
+[node name="CheckBox2" type="CheckBox" parent="PanelContainer/ItemList"]
+layout_mode = 2
+text = "Zoom out camera"
+
+[node name="Zoom" type="HSlider" parent="PanelContainer/ItemList"]
+layout_mode = 2
+max_value = 1.0
+step = 0.05
+value = 1.0
+
+[node name="Label" type="Label" parent="PanelContainer/ItemList/Zoom"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CamTop" type="Label" parent="PanelContainer/ItemList"]
+layout_mode = 2
+text = "Camera Top Limit:"
+
+[node name="CamBottom" type="Label" parent="PanelContainer/ItemList"]
+layout_mode = 2
+text = "Camera Bottom Limit:"
+
+[connection signal="toggled" from="PanelContainer/ItemList/CheckBox2" to="." method="_on_check_box_2_toggled"]

@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://bc213sqfvwnc7"]
+
+[ext_resource type="Script" path="res://Scripts/Enviroment/game.gd" id="1_1pgh3"]
+[ext_resource type="PackedScene" uid="uid://c7xm82uma1fy7" path="res://Scenes/Characters/player.tscn" id="2_aorjr"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_1pgh3")
+starting_map = "spawn.tscn"
+
+[node name="Player" parent="." instance=ExtResource("2_aorjr")]
+
+[editable path="Player"]
