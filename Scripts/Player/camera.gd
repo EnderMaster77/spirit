@@ -5,9 +5,9 @@ class_name CameraPlus
 var target_limit_bottom: int = 1440
 var state
 enum CameraState {
-    FREE,
-    CENTERING,
-    CENTERED
+	FREE,
+	CENTERING,
+	CENTERED
 }
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -29,6 +29,8 @@ func handle_x_offset(delta: float):
 	position.x = clampf(position.x, -300, 300)
 
 func handle_y_limits(delta:float):
+	if MetSys.get_current_room_instance() == null:
+		return
 	if player.global_position.x >= MetSys.get_current_room_instance().get_size().x - 250\
 	or player.global_position.x <=250:
 		print("Edging")

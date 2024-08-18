@@ -20,6 +20,7 @@ var current_state: String
 
 @onready var cam = $Camera2D
 
+var disable: bool = false
 
 func _ready() -> void:
 	friction = DEFAULT_FRICTION
@@ -27,7 +28,12 @@ func _ready() -> void:
 
 
 func _process(delta: float) -> void:
-	mod_camera(delta)
+	if MetSys.get_current_room_instance() == null or disable == true:
+		velocity = Vector2.ZERO
+		hide()
+		return
+	show()
+
 
 
 func _physics_process(delta: float) -> void:

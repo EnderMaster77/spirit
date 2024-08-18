@@ -30,27 +30,34 @@ func _physics_tick():
 
 ## Loads a map and adds as a child of this node. If a map already exists, it will be removed before the new one is loaded. This method is asynchronous, so you should call it with [code]await[/code] if you want to do something after the map is loaded. Alternatively, you can use [signal room_loaded].
 func load_room(path: String):
+	var fadeinanim
+	for child in player.get_children():
+		if child.has_method("fadein"):
+			fadeinanim = child
 	if not path.is_absolute_path():
 		path = MetSys.get_full_room_path(path)
-	
 	if map:
+		fadeinanim.fading_in = true
+		player.disable = true
+		while fadeinanim.alpha < 1:
+			await get_tree().create_timer(0.05).timeout
 		map.queue_free()
 		await map.tree_exited
 		map = null
-	
+
 	map = load(path).instantiate()
 	add_child(map)
-	
+	player.disable = false
 	MetSys.current_layer = MetSys.get_current_room_instance().get_layer()
 	room_loaded.emit()
 
 func get_save_data() -> Dictionary:
 	var data: Dictionary
 	data.merge(_get_save_data())
-	
+
 	for module in modules:
 		data.merge(module._get_save_data())
-	
+
 	return data
 
 ## Virtual method to be overriden in your game class. Called by SaveManager's store_game(). Use it to return the data you want to save. Data of added modules is stored automatically.
@@ -59,7 +66,7 @@ func _get_save_data() -> Dictionary:
 
 func set_save_data(data: Dictionary):
 	_set_save_data(data)
-	
+
 	for module in modules:
 		module._set_save_data(data)
 

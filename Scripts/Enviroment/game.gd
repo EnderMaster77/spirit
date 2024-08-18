@@ -82,4 +82,3 @@ func save_game():
 
 func init_room():
 	player.on_enter()
-	MetSys.get_current_room_instance().adjust_camera_limits($Player/Camera2D)
