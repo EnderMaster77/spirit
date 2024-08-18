@@ -20,20 +20,13 @@ var current_state: String
 
 @onready var cam = $Camera2D
 
-var disable: bool = false
-
 func _ready() -> void:
 	friction = DEFAULT_FRICTION
 	element = "neutral"
 
 
 func _process(delta: float) -> void:
-	if MetSys.get_current_room_instance() == null or disable == true:
-		velocity = Vector2.ZERO
-		hide()
-		return
-	show()
-
+	pass
 
 
 func _physics_process(delta: float) -> void:
@@ -43,6 +36,14 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
+func disabled_movement(_direction:float,_delta:float): # Called when player is loading room and shouldn't move.
+	velocity = Vector2.ZERO
+	if MetSys.get_current_room_instance() == null:
+		global_position.x = clampf(global_position.x,-0.01,99999999)
+		global_position.y = clampf(global_position.y,-0.01,99999999)
+		return
+	global_position.x = clampf(global_position.x,-0.01,MetSys.get_current_room_instance().get_size().x+0.01)
+	global_position.y = clampf(global_position.y,-0.01,99999999)
 
 func neutral_movement(direction: float, delta: float) -> void:
 	# Y axis Control
@@ -190,5 +191,9 @@ func _on_hitbox_collision(area: Node2D) -> void:
 
 
 func on_enter():
+	if MetSys.get_current_room_instance() == null:
+		return
 	MetSys.get_current_room_instance().adjust_camera_limits(cam)
+	if element == "disabled":
+		element = "neutral"
 	print(global_position)

@@ -33,7 +33,6 @@ func handle_y_limits(delta:float):
 		return
 	if player.global_position.x >= MetSys.get_current_room_instance().get_size().x - 250\
 	or player.global_position.x <=250:
-		print("Edging")
 		if state == CameraState.FREE && limit_bottom != round((global_position.y/1440)+0.5) * 1440:
 			limit_bottom = ((get_viewport_rect().size.y/2)/ zoom.y) + global_position.y
 			state = CameraState.CENTERING

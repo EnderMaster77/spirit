@@ -108,11 +108,9 @@ func _update_neighbor_previews():
 
 ## Adjusts the limits of the given [param camera] to be within this room's rectangular bounds.
 func adjust_camera_limits(camera: CameraPlus):
-	print("Adjusted Camera.")
 	camera.limit_left = 0
 	camera.limit_top = 0
 	camera.limit_right = get_size().x
-	camera.limit_bottom = (round((camera.global_position.y/1440)+0.5)) * 1440
 	camera.target_limit_bottom = get_size().y
 
 ## Returns the full size of this room, based on the cells and [code]in_game_cell_size[/code] defined in MetSys Settings.

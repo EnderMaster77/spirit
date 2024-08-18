@@ -21,8 +21,10 @@ func _process(delta: float) -> void:
 		playercam.limit_left = -99999999
 		playercam.zoom.x = $PanelContainer/ItemList/Zoom.value
 		playercam.zoom.y = $PanelContainer/ItemList/Zoom.value
-	$PanelContainer/ItemList/CamTop.text = str(playercam.limit_top)
-	$PanelContainer/ItemList/CamBottom.text = str(playercam.limit_bottom)
+		$PanelContainer/ItemList/Zoom/Label.text = str($PanelContainer/ItemList/Zoom.value)
+	$PanelContainer/ItemList/CamTop.text = "Camera Top Limit: " + str(playercam.limit_top)
+	$PanelContainer/ItemList/CamBottom.text = "Camera Bottom Limit: " + str(playercam.limit_bottom)
+	$"PanelContainer/ItemList/Celement".text = player.element
 
 func _input(event: InputEvent) -> void:
 	if Input.is_action_just_pressed("showDebug"):
@@ -35,3 +37,7 @@ func _on_check_box_2_toggled(toggled_on: bool) -> void:
 	if toggled_on == false:
 		playercam.zoom.x = normal_zoom
 		playercam.zoom.y = normal_zoom
+
+
+func _on_switch_pressed() -> void:
+	player.element = $PanelContainer/ItemList/HBoxContainer/TextEdit.text

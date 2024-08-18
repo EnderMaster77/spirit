@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://bc213sqfvwnc7"]
+
+[ext_resource type="Script" path="res://Scripts/Enviroment/game.gd" id="1_iin1c"]
+[ext_resource type="PackedScene" uid="uid://c7xm82uma1fy7" path="res://Scenes/Characters/player.tscn" id="2_apa1v"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_iin1c")
+starting_map = "spawn.tscn"
+
+[node name="Player" parent="." instance=ExtResource("2_apa1v")]
+
+[node name="Minimap" parent="Player/UI" index="1"]
+physics_interpolation_mode = 0
+script = null
+
+[editable path="Player"]

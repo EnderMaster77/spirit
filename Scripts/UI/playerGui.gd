@@ -10,7 +10,6 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	print(alpha," fading out: ",fading_out," fading_in: ",fading_in)
 	if fading_out == true:
 		fading_in = false
 		$fadeout.color.a = lerpf($fadeout.color.a, 0, delta * 16)
