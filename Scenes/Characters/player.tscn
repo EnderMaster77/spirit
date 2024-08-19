@@ -9,8 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://bw1ddd8mpx7t7" path="res://icon.png" id="7_i3ybo"]
 [ext_resource type="Script" path="res://Scripts/Player/spriteManager.gd" id="8_mccy3"]
 [ext_resource type="Material" uid="uid://bewkrxpl1lgge" path="res://Shaders/ShaderMaterials/neutraltransition.tres" id="9_7318l"]
-[ext_resource type="PackedScene" uid="uid://dch8dyylb7526" path="res://addons/MetroidvaniaSystem/Template/Nodes/Minimap.tscn" id="9_euaeu"]
 [ext_resource type="Script" path="res://Scripts/UI/playerGui.gd" id="10_h3mnn"]
+[ext_resource type="PackedScene" uid="uid://dch8dyylb7526" path="res://addons/MetroidvaniaSystem/Template/Nodes/Minimap.tscn" id="11_jlm3t"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_kgxqf"]
 size = Vector2(116, 128)
@@ -28,12 +28,13 @@ script = ExtResource("1_1q7we")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_kgxqf")
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player")]
 physics_interpolation_mode = 1
 zoom = Vector2(0.75, 0.75)
 process_callback = 0
 limit_bottom = 1440
 script = ExtResource("2_uej21")
+player = NodePath("..")
 
 [node name="FXman" type="CanvasLayer" parent="."]
 process_mode = 3
@@ -83,7 +84,9 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 0)
 
-[node name="Minimap" parent="UI" instance=ExtResource("9_euaeu")]
+[node name="Minimap" parent="UI" instance=ExtResource("11_jlm3t")]
+offset_right = 96.0
+display_player_location = true
 area = Vector2i(5, 5)
 
 [connection signal="switch_to_element" from="ElementSwitchMan" to="SpriteManager" method="_on_switch_to_element"]

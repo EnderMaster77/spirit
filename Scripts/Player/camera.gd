@@ -5,9 +5,8 @@ class_name CameraPlus
 var target_limit_bottom: int = 1440
 var state
 enum CameraState {
-	FREE,
-	CENTERING,
-	CENTERED
+	FREE = 0,
+	CENTERING = 1,
 }
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -17,6 +16,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	print(state)
 	handle_x_offset(delta)
 	handle_y_limits(delta)
 
@@ -37,6 +37,7 @@ func handle_y_limits(delta:float):
 			limit_bottom = ((get_viewport_rect().size.y/2)/ zoom.y) + global_position.y
 			state = CameraState.CENTERING
 		limit_bottom = int(lerpf(limit_bottom,round((global_position.y/1440)+0.5) * 1440,delta *16))#round((global_position.y/1440)+0.5) * 1440
+		print("LB: ",limit_bottom)
 		return
 	state = CameraState.FREE
 	if limit_bottom <=((get_viewport_rect().size.y/2)/ zoom.y) + global_position.y &&\

@@ -9,8 +9,4 @@ starting_map = "spawn.tscn"
 
 [node name="Player" parent="." instance=ExtResource("2_apa1v")]
 
-[node name="Minimap" parent="Player/UI" index="1"]
-physics_interpolation_mode = 0
-script = null
-
 [editable path="Player"]
