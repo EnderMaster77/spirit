@@ -25,7 +25,7 @@ func _ready() -> void:
 	# A trick for static object reference (before static vars were a thing).
 	get_script().set_meta(&"singleton", self)
 	# Make sure MetSys is in initial state.
-	# Does not matter in this project, but normally this ensures that the game works correctly when you exit to menu and start again.
+
 	MetSys.reset_state()
 	# Assign player for MetSysGame.
 	set_player($Player)

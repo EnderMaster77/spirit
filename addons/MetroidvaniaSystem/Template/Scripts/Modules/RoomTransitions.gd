@@ -34,9 +34,11 @@ func _on_room_changed(target_room: String):
 		player.position -= MetSys.get_current_room_instance().get_room_position_offset(prev_room_instance)
 		# This solution comepletely avoids the problem. The problem still exists, but it's just harder to cause.
 		if player.position.x > MetSys.get_current_room_instance().get_size().x/2:
-			player.global_position.x -= 20
+			player.global_position.x -= 30
+			player.velocity.x = player.MAX_SPEED * -1
 		else:
-			player.global_position.x += 20
+			player.global_position.x += 30
+			player.velocity.x = player.MAX_SPEED
 		prev_room_instance.queue_free()
 	player.get_tree().paused =false
 	fadeinanim.fading_out = true
